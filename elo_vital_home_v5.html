@@ -47,7 +47,7 @@
   /* Jogo do Herói: opaque → cobre o vídeo ao subir; imagem com parallax 0.3× */
   #jogo{ position:relative; min-height:100svh; background:var(--ink); overflow:hidden; z-index:2; display:flex; align-items:flex-end; }
   #jogo .img{ position:absolute; inset:0; z-index:0; background-position:center; background-size:cover;
-    filter:grayscale(1) contrast(1.05) brightness(.85); will-change:transform; transform:scale(2.5); }
+    filter:contrast(1.05) brightness(.85); will-change:transform; transform:scale(2.5); }
   #jogo .scrim{ position:absolute; inset:0; z-index:1; background:linear-gradient(to top, rgba(6,6,7,.85), rgba(6,6,7,.15) 55%, rgba(6,6,7,.4)); }
   #jogo .wrap{ position:relative; z-index:2; padding-block:clamp(84px,16vh,150px); }
   #jogo h2{ font-family:var(--f-display); font-weight:300; margin:0; font-size:clamp(46px,9vw,120px); line-height:.98; }
