@@ -110,10 +110,10 @@
   /* Sobre */
   #sobre{ background:var(--ink-2); }
   #sobre .ghost{ bottom:4vh; font-size:clamp(180px,34vw,500px); }
-  .about{ display:grid; grid-template-columns:minmax(260px,.85fr) 1.15fr; gap:clamp(30px,5vw,74px); align-items:center; width:100%; padding-block:clamp(96px,14vh,132px); }
+  .about{ display:grid; grid-template-columns:minmax(300px,1.2fr) 1fr; gap:clamp(30px,5vw,74px); align-items:center; width:100%; padding-block:clamp(96px,14vh,132px); }
   @media (max-width:860px){ .about{ grid-template-columns:1fr; max-width:560px; } }
-  .portrait{ aspect-ratio:4/5; overflow:hidden; border:1px solid var(--line); }
-  .portrait img{ width:100%; height:100%; object-fit:cover; display:block; will-change:transform; transform:scale(1.4);
+  .portrait{ aspect-ratio:458/250; overflow:hidden; border:1px solid var(--line); }
+  .portrait img{ width:100%; height:100%; object-fit:cover; display:block; will-change:transform; transform:scale(1.1);
     filter:grayscale(1) contrast(1.05) brightness(.97); }
   .frame{ position:absolute; inset:0; border:1px solid var(--line); pointer-events:none; }
   .portrait-box{ position:relative; }
@@ -275,7 +275,7 @@
     const layers = [...document.querySelectorAll('[data-speed]')].map(el=>({
       el, host: el.parentElement, sp: parseFloat(el.dataset.speed)||0, x: parseFloat(el.dataset.x)||0 }));
     const inner = [...document.querySelectorAll('[data-para]')].map(el=>({
-      el, host: el.closest('.media')||el.closest('.portrait'), s: el.closest('.portrait') ? 1.4 : 1.35 }));
+      el, host: el.closest('.media')||el.closest('.portrait'), s: el.closest('.portrait') ? 1.1 : 1.35, amp: el.closest('.portrait') ? 12 : 44 }));
     let tk=false;
     function updLayers(){
       const vh=innerHeight, vw=innerWidth;
@@ -289,7 +289,7 @@
         const r=i.host.getBoundingClientRect();
         if(r.bottom < -vh || r.top > 2*vh){ continue; }
         const prog = clamp((r.top + r.height/2 - vh/2)/vh, -1, 1);
-        i.el.style.transform = 'translateY(' + (prog*44).toFixed(1) + 'px) scale(' + i.s + ')';
+        i.el.style.transform = 'translateY(' + (prog*i.amp).toFixed(1) + 'px) scale(' + i.s + ')';
       }
       tk=false;
     }
