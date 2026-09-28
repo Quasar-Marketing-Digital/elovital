@@ -110,6 +110,8 @@
   /* Sobre */
   /* Blog pinado (0×) enquanto o Sobre sobe e cobre — mesma mecânica do vídeo → Jogo do Herói. 'top' ajustado por JS: min(0, vh - altura) */
   #blog{ position:sticky; top:0; }
+  /* como no herói: imagens/fundo ficam fixos, o TEXTO continua rolando 1× (--pin = quanto o Sobre já subiu; 'translate' compõe com o transform do reveal/parallax) */
+  #blog .sec-head, #blog .post h3, #blog .post p, #blog .post .more{ translate:0 calc(var(--pin,0) * -1px); }
   #sobre{ background:var(--ink-2); z-index:3; }
   #sobre .ghost{ bottom:4vh; font-size:clamp(180px,34vw,500px); }
   .about{ display:grid; grid-template-columns:minmax(300px,1.2fr) 1fr; gap:clamp(30px,5vw,74px); align-items:center; width:100%; padding-block:clamp(96px,14vh,132px); }
@@ -277,6 +279,11 @@
   addEventListener('scroll', updChrome, {passive:true});
   addEventListener('resize', updChrome, {passive:true});
   updChrome();
+  // texto do Blog rola enquanto o resto fica pinado
+  function updPin(){ blogEl.style.setProperty('--pin', clamp(innerHeight - sobreEl.getBoundingClientRect().top, 0, innerHeight).toFixed(1)); }
+  addEventListener('scroll', updPin, {passive:true});
+  addEventListener('resize', updPin, {passive:true});
+  updPin();
 
   if(!rm){
     const layers = [...document.querySelectorAll('[data-speed]')].map(el=>({
