@@ -119,6 +119,17 @@
   #blog{ position:sticky; top:0; }
   /* como no herói: imagens/fundo ficam fixos, o TEXTO continua rolando 1× (--pin = quanto o Sobre já subiu; 'translate' compõe com o transform do reveal/parallax) */
   #blog .sec-head, #blog .post h3, #blog .post p, #blog .post .more{ translate:0 calc(var(--pin,0) * -1px); }
+  /* Blog cabe inteiro numa tela (título + fotos + textos) para travar já com tudo à vista.
+     Fotos proporcionais à ALTURA da janela (--ph), 4:5; mais espaço entre os 3 blocos. Telas pequenas mantêm o layout anterior. */
+  @media (min-width:861px) and (min-height:601px){
+    #blog{ height:100svh; min-height:0; --ph:clamp(170px, calc(94svh - 440px), 460px); --cw:max(calc(var(--ph) * .8), 270px); }
+    .blog-inner{ height:100%; display:flex; flex-direction:column; justify-content:flex-start; padding-top:clamp(84px,11vh,112px); padding-bottom:clamp(20px,4vh,44px); }
+    .sec-head{ margin-bottom:clamp(18px,3.4vh,40px); }
+    .grid3{ display:flex; justify-content:space-between; gap:clamp(32px,6vw,110px); }
+    .post{ flex:0 1 var(--cw); }
+    .post .media{ aspect-ratio:auto; width:calc(var(--ph) * .8); height:var(--ph); }
+    .post h3{ margin:16px 0 6px; }
+  }
   #sobre{ background:var(--ink-2); z-index:3; }
   #sobre .ghost{ bottom:4vh; font-size:clamp(180px,34vw,500px); }
   .about{ display:grid; grid-template-columns:minmax(300px,1.2fr) 1fr; gap:clamp(30px,5vw,74px); align-items:center; width:100%; padding-block:clamp(96px,14vh,132px); }
