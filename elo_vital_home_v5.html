@@ -108,13 +108,15 @@
   .post .more:hover{ letter-spacing:.24em; }
 
   /* Sobre */
-  #sobre{ background:var(--ink-2); }
+  /* Blog pinado (0×) enquanto o Sobre sobe e cobre — mesma mecânica do vídeo → Jogo do Herói. 'top' ajustado por JS: min(0, vh - altura) */
+  #blog{ position:sticky; top:0; }
+  #sobre{ background:var(--ink-2); z-index:3; }
   #sobre .ghost{ bottom:4vh; font-size:clamp(180px,34vw,500px); }
   .about{ display:grid; grid-template-columns:minmax(300px,1.2fr) 1fr; gap:clamp(30px,5vw,74px); align-items:center; width:100%; padding-block:clamp(96px,14vh,132px); }
   @media (max-width:860px){ .about{ grid-template-columns:1fr; max-width:560px; } }
   .portrait{ aspect-ratio:458/250; overflow:hidden; border:1px solid var(--line); }
   .portrait img{ width:100%; height:100%; object-fit:cover; display:block; will-change:transform; transform:scale(1.1);
-    filter:grayscale(1) contrast(1.05) brightness(.97); }
+    filter:contrast(1.05) brightness(.97); }
   .frame{ position:absolute; inset:0; border:1px solid var(--line); pointer-events:none; }
   .portrait-box{ position:relative; }
   .about .display{ font-size:clamp(42px,5.6vw,74px); }
@@ -261,11 +263,16 @@
     {threshold:.16, rootMargin:'0px 0px -6% 0px'});
   document.querySelectorAll('[data-rev]').forEach(el=>io.observe(el));
 
-  const blogEl = document.getElementById('blog');
+  const blogEl = document.getElementById('blog'), sobreEl = document.getElementById('sobre');
+  // Blog fica pinado (0×) até o fim dele; o Sobre (z acima) sobe e o cobre
+  function pinBlog(){ blogEl.style.top = Math.min(0, innerHeight - blogEl.offsetHeight) + 'px'; }
+  pinBlog(); addEventListener('resize', pinBlog, {passive:true}); addEventListener('load', pinBlog);
+  // menu/vmark escuros só onde o Blog (visível, não coberto pelo Sobre) está por baixo
   function updChrome(){
-    const r = blogEl.getBoundingClientRect(), vh = innerHeight;
-    document.body.classList.toggle('tb-light', r.top < 40 && r.bottom > 40);
-    document.body.classList.toggle('vm-light', r.top < vh - 90 && r.bottom > vh - 90);
+    const b = blogEl.getBoundingClientRect(), s = sobreEl.getBoundingClientRect(), vh = innerHeight;
+    const light = y => b.top < y && b.bottom > y && s.top > y;
+    document.body.classList.toggle('tb-light', light(40));
+    document.body.classList.toggle('vm-light', light(vh - 90));
   }
   addEventListener('scroll', updChrome, {passive:true});
   addEventListener('resize', updChrome, {passive:true});
