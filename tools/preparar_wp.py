@@ -76,6 +76,10 @@ def build(src, title):
     if src.endswith('home_v5.html'):
         # a home tem CSS/JS próprios completos: não misturar com o site.css
         html = '\n'.join([fonts, styles, GUARD.join(['<style>', '</style>']), body.strip()])
+    # 5b) script próprio da home: isolar em função, senão 'const clamp' colide com variável global de plugin do WordPress
+    if has_inline_js:
+        html = html.replace('<script>\n', '<script>\n(function(){\n', 1)
+        html = html[:html.rindex('</script>')] + '})();\n</script>' + html[html.rindex('</script>') + 9:]
     # 6) o WordPress troca "&" por "&#038;" no conteúdo (quebra "&&" do JavaScript): reescrever sem "&"
     for a, b in [('menuBtn && navEl', 'menuBtn ? navEl : null'),
                  ('r.top < y && r.bottom > y', '(r.top < y ? r.bottom > y : false)'),
