@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>O Jogo do Herói — Elo Vital</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Newsreader:ital,wght@0,400;1,400&family=Archivo:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+  /* ===== página: O Jogo do Herói ===== */
+  main .sec:not(#topo){ min-height:0; }
+  .light .eyebrow{ color:#5b5953; }
+  .pad{ padding-block:clamp(96px,14vh,150px); width:100%; }
+  .cols{ display:grid; gap:clamp(30px,6vw,96px); align-items:center; width:100%; }
+  .cols.a{ grid-template-columns:1.1fr .9fr; }
+  .cols.b{ grid-template-columns:.85fr 1.15fr; }
+  @media (max-width:860px){ .cols.a, .cols.b{ grid-template-columns:1fr; max-width:560px; margin-inline:auto; } }
+  h2.display{ font-size:clamp(40px,5.6vw,78px); margin-bottom:clamp(22px,3vh,34px); }
+
+  /* abertura */
+  #topo{ align-items:flex-end; background:var(--ink); }
+  #topo .scrim{ background:linear-gradient(to top, rgba(6,6,7,.85), rgba(6,6,7,.15) 55%, rgba(6,6,7,.4)); }
+  #topo .wrap{ padding-block:clamp(84px,16vh,150px); align-items:flex-end; }
+  #topo h1{ font-family:var(--f-display); font-weight:300; margin:0; font-size:clamp(46px,9vw,120px); line-height:.98; }
+  #topo .lead{ font-size:clamp(17px,1.7vw,22px); color:var(--paper-dim); max-width:40ch; margin:24px 0 28px; }
+  .bg{ filter:contrast(1.05) brightness(.85); }
+
+  /* qual seu maior desafio */
+  #desafio .ghost{ bottom:2vh; font-size:clamp(150px,26vw,400px); }
+  #desafio .photo .in{ aspect-ratio:654/821; }
+
+  /* jornada simbólica (fundo branco) */
+  #simbolica .art{ display:block; width:100%; max-width:520px; margin-inline:auto; height:auto; mix-blend-mode:multiply; }
+  #simbolica .ghost{ top:4vh; font-size:clamp(150px,24vw,380px); }
+  #simbolica .display{ color:var(--ink); }
+
+  /* a jornada heróica */
+  #jornada .ghost{ top:3vh; font-size:clamp(150px,30vw,460px); }
+  .steps{ display:flex; flex-wrap:wrap; align-items:baseline; gap:.15em .5em; font-family:var(--f-display); font-weight:300; line-height:1;
+    font-size:clamp(32px,9vw,124px); margin:0 0 clamp(30px,6vh,64px); }
+  .steps span{ color:var(--paper); }
+  .steps i{ font-style:normal; color:var(--mute); font-size:.5em; }
+  #jornada .copy-block em{ font-style:normal; color:var(--paper); border-bottom:1px solid var(--line); }
+  #jornada .photo .in{ aspect-ratio:793/480; }
+
+  /* como funciona */
+  #como{ background:var(--ink); }
+  #como .scrim{ background:linear-gradient(to right, rgba(6,6,7,.92), rgba(6,6,7,.78) 55%, rgba(6,6,7,.6)); }
+  #como .bg{ background-position:70% 40%; }
+  #como .cols{ align-items:start; }
+  #como h3{ font-family:var(--f-display); font-weight:400; font-size:clamp(28px,3vw,40px); line-height:1.1; margin:0 0 20px; }
+
+  /* quem facilita */
+  #facilita .ghost{ bottom:1vh; font-size:clamp(150px,28vw,420px); }
+  #facilita .photo .in{ aspect-ratio:808/439; }
+  #facilita .who{ font-size:clamp(20px,2vw,27px); line-height:1.5; color:var(--paper); max-width:34ch; margin:0 0 26px; }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <a href="/" class="brand" aria-label="Elo Vital — início"><img class="logo-mark" src="imagens/logo_elo_vital.png" alt=""><b>Elo Vital</b></a>
+  <div class="social">
+    <a class="insta" href="#" aria-label="Instagram" title="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+    <a class="whats" href="https://wa.me/5516988209196" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="b" d="M12 2.6a9.4 9.4 0 0 0-8.1 14.1L2.7 21.3l4.7-1.2A9.4 9.4 0 1 0 12 2.6z"/><path class="p" transform="translate(7.2 7.2) scale(.4)" d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></a>
+  </div>
+  <nav class="nav" id="nav" aria-label="Principal"><a href="/">Início</a><a href="/psicologia-junguiana/">Psicologia Junguiana</a><a href="/o-jogo-do-heroi/" aria-current="page">O Jogo do Herói</a><a href="/blog/">Blog</a><a href="#contato">Contato</a></nav>
+  <button class="menu-btn" id="menubtn" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav"><span></span><span></span><span></span></button>
+</header>
+<div class="vmark">psicologia junguiana</div>
+
+<main>
+
+  <!-- ABERTURA -->
+  <section class="sec" id="topo">
+    <div class="bg" data-bgpar style="background-image:url('imagens/heroi_jogo.jpg')"></div>
+    <div class="scrim"></div>
+    <div class="wrap"><div>
+      <h1>O Jogo do Herói</h1>
+      <p class="lead">Caminhos e insights sobre os grandes desafios da vida.</p>
+      <a class="btn" href="https://wa.me/5516988209196/?text=Tenho%20interesse%20em%20uma%20sess%C3%A3o%20do%20O%20Jogo%20do%20Her%C3%B3i.%20Gostaria%20de%20mais%20informa%C3%A7%C3%B5es." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="b" d="M12 2.6a9.4 9.4 0 0 0-8.1 14.1L2.7 21.3l4.7-1.2A9.4 9.4 0 1 0 12 2.6z"/><path class="p" transform="translate(7.2 7.2) scale(.4)" d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Agende sua sessão</a>
+    </div></div>
+  </section>
+
+  <!-- QUAL SEU MAIOR DESAFIO? -->
+  <section class="sec" id="desafio">
+    <div class="ghost" data-speed="0.5" data-x="-12" aria-hidden="true">Desafio</div>
+    <div class="rule" data-speed="-0.25" style="left:12%; top:-10%; height:55%"></div>
+    <div class="wrap"><div class="pad"><div class="cols a">
+      <div class="copy-block">
+        <h2 class="display" data-rev>Qual seu maior desafio?</h2>
+        <p data-rev>Todos nós enfrentamos desafios que nos convocam em diferentes momentos da vida. Às vezes aparecem como crises ou bloqueios que nos paralisam. Outras vezes, como inquietações profundas, padrões que insistem em se repetir, ou um chamado para expandir os horizontes. Quando estamos imersos nessas situações, pode ser mais difícil enxergar respostas criativas e novos caminhos com clareza.</p>
+        <p data-rev>Este jogo foi criado para ajudar você a olhar para seus desafios de uma perspectiva diferente. Por meio de imagens e símbolos, você pode descobrir padrões de comportamento, identificar crenças limitantes e reconhecer recursos internos que talvez nem saiba que possui.</p>
+        <p data-rev>Aqui você encontrará um espaço seguro para explorar suas questões mais profundas, onde cada insight é uma peça do quebra-cabeça que pode revelar não apenas a natureza dos seus desafios, mas também as possibilidades de transformação que existem.</p>
+      </div>
+      <div class="photo" data-speed="-0.06"><div class="in" data-rev><img data-para alt="Tabuleiro do Jogo do Herói com peças e esferas de vidro" src="imagens/jogo_tabuleiro.jpg"></div><div class="frame" style="inset:-18px 18px 18px -18px"></div></div>
+    </div></div></div>
+  </section>
+
+  <!-- QUE TAL UMA JORNADA SIMBÓLICA? (fundo branco) -->
+  <section class="sec light" id="simbolica">
+    <div class="ghost" data-speed="0.5" data-x="14" aria-hidden="true">Símbolo</div>
+    <div class="wrap"><div class="pad"><div class="cols b">
+      <div data-speed="-0.05"><div data-rev><img class="art" alt="imagens de figuras humanas arquetípicas" src="imagens/herois_arquetipos.jpg"></div></div>
+      <div class="copy-block">
+        <h2 class="display" data-rev>Que tal uma jornada simbólica?</h2>
+        <p data-rev>Através da linguagem simbólica e arquetípica, o Jogo do Herói cria um diálogo profundo com suas questões.</p>
+        <p data-rev>Durante a jornada, figuras arquetípicas emergem como guias, padrões universais da psique, que ajudam você a enxergar e lidar com seus desafios de formas que o pensamento habitual não alcança.</p>
+        <p data-rev>O Jogo se adapta ao seu momento presente, revelando conexões, significados e possibilidades que passam frequentemente despercebidas no cotidiano.</p>
+        <p data-rev>Fundamentado na mitologia da jornada do herói e na psicologia arquetípica de Carl Jung, a sessão é conduzida por uma terapeuta junguiana certificada pelos criadores do jogo.</p>
+        <p data-rev>Cada trajetória é, ao mesmo tempo, única, singular e coletiva, e a jornada da experiência humana em seus diferentes momentos.</p>
+        <a class="btn" data-rev href="https://wa.me/5516988209196" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="b" d="M12 2.6a9.4 9.4 0 0 0-8.1 14.1L2.7 21.3l4.7-1.2A9.4 9.4 0 1 0 12 2.6z"/><path class="p" transform="translate(7.2 7.2) scale(.4)" d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Agende sua sessão</a>
+      </div>
+    </div></div></div>
+  </section>
+
+  <!-- A JORNADA HERÓICA -->
+  <section class="sec" id="jornada">
+    <div class="ghost" data-speed="0.5" data-x="-14" aria-hidden="true">Jornada</div>
+    <div class="rule" data-speed="0.3" style="right:11%; top:30%; height:70%"></div>
+    <div class="wrap"><div class="pad">
+      <h2 class="eyebrow" data-rev>A Jornada heróica</h2>
+      <div class="steps" data-rev aria-hidden="true"><span>Sair</span><i>→</i><span>Ir</span><i>→</i><span>Retornar</span></div>
+      <div class="cols a">
+        <div class="copy-block">
+          <p data-rev>A jornada heróica se expressa essencialmente em três momentos principais. O movimento de <em>Sair</em> do que nos é mais habitual, conhecido ou cômodo.</p>
+          <p data-rev><em>Ir</em> em direção do que se desconhece, novas percepções, descobertas e conexões, e <em>Retornar</em> expressando e integrando seus insights e aprendizados em sua vida.</p>
+          <p data-rev>A jornada é a experiência humana nos seus diferentes momentos, e cada trajetória é ao mesmo tempo, singular, unica e coletiva.</p>
+        </div>
+        <div class="photo" data-speed="0.08"><div class="in" data-rev><img data-para alt="Peça Regente do Jogo do Herói ao lado de um dado azul e uma esfera vermelha" src="imagens/regente.jpg"></div><div class="frame" style="inset:18px -18px -18px 18px"></div></div>
+      </div>
+    </div></div>
+  </section>
+
+  <!-- COMO FUNCIONA -->
+  <section class="sec" id="como">
+    <div class="bg" data-bgpar style="background-image:url('imagens/heroi_jogo.jpg')"></div>
+    <div class="scrim"></div>
+    <div class="wrap"><div class="pad"><div class="cols a">
+      <div class="copy-block">
+        <h2 class="display" data-rev>Como funciona</h2>
+        <p data-rev>O jogo do Herói é um jogo de tabuleiro criado para gerar insights, autoconhecimento e caminhos para lidar com os grandes desafios da vida, através da linguag.em mitológica, lúdica e criativa</p>
+        <p data-rev>Pode ser jogado individualmente ou em até quatro jogadores. O jogo começa quando você define um desafio que esteja enfrentando em sua vida nesse momento.</p>
+      </div>
+      <div class="copy-block">
+        <h3 data-rev>Inclui uma sessão devolutiva</h3>
+        <p data-rev>Após o jogo você terá uma sessão devolutiva individual, a ser agendada, para aprofundar mais os elementos que surgiram na sua jornada.</p>
+        <p data-rev>Será um momento para novas considerações e insights enriquecendo a percepção e atuação pós-jogo.</p>
+        <p data-rev>É também uma oportunidade para digerir o que viu, ouviu e sentiu, e com acompanhamento profissional, acolher e entender questões que forem importantes.</p>
+        <p data-rev>Este suporte, que não faz parte do jogo, é um compromisso que tenho para que cada jogador possa aprofundar elementos simbólicos que o Jogo trouxe para cada um.</p>
+        <a class="btn" data-rev href="https://wa.me/5516988209196/?text=Tenho%20interesse%20em%20uma%20sess%C3%A3o%20do%20O%20Jogo%20do%20Her%C3%B3i.%20Gostaria%20de%20mais%20informa%C3%A7%C3%B5es." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="b" d="M12 2.6a9.4 9.4 0 0 0-8.1 14.1L2.7 21.3l4.7-1.2A9.4 9.4 0 1 0 12 2.6z"/><path class="p" transform="translate(7.2 7.2) scale(.4)" d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Agende sua sessão</a>
+      </div>
+    </div></div></div>
+  </section>
+
+  <!-- QUEM FACILITA -->
+  <section class="sec" id="facilita">
+    <div class="ghost" data-speed="0.5" data-x="16" aria-hidden="true">Paula</div>
+    <div class="wrap"><div class="pad"><div class="cols b">
+      <div class="photo" data-speed="-0.06"><div class="in" data-rev><img data-para alt="Paula Cordero" src="imagens/paula_cordero.jpg"></div><div class="frame" style="inset:-18px 18px 18px -18px"></div></div>
+      <div>
+        <h2 class="display" data-rev>Quem Facilita</h2>
+        <p class="who" data-rev>O jogo é conduzido por mim, Paula Cordero. Psicóloga, especializada em Psicologia Junguiana e facilitadora certificada no ‘O Jogo do Herói’, em Breathwork.</p>
+        <a class="btn" data-rev href="https://wa.me/5516988209196" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="b" d="M12 2.6a9.4 9.4 0 0 0-8.1 14.1L2.7 21.3l4.7-1.2A9.4 9.4 0 1 0 12 2.6z"/><path class="p" transform="translate(7.2 7.2) scale(.4)" d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Agende sua sessão</a>
+      </div>
+    </div></div></div>
+  </section>
+
+</main>
+
+<footer id="contato">
+  <div class="foot-in">
+    <span class="foot-brand"><img src="imagens/logo_elo_vital.png" alt=""> Elo Vital</span>
+    <nav class="foot-nav" aria-label="Redes"><a href="#">Instagram</a><a href="https://wa.me/5516988209196" target="_blank" rel="noopener">WhatsApp</a></nav>
+    <p class="copy">© Elo Vital — Todos os direitos reservados — Desenvolvido por Quasar Marketing Digital</p>
+  </div>
+</footer>
+
+<script src="assets/site.js"></script>
+</body>
+</html>
