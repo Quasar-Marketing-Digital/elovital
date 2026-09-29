@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Blog — Elo Vital</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Newsreader:ital,wght@0,400;1,400&family=Archivo:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/assets/site.css">
+<style>
+  main .sec:not(#topo){ min-height:0; }
+  .light .eyebrow{ color:#5b5953; }
+  .pad{ padding-block:clamp(96px,14vh,150px); width:100%; }
+  .cols{ display:grid; gap:clamp(30px,6vw,96px); align-items:center; width:100%; }
+  .cols.b{ grid-template-columns:.85fr 1.15fr; }
+  @media (max-width:860px){ .cols.b{ grid-template-columns:1fr; max-width:560px; margin-inline:auto; } }
+  h2.display{ font-size:clamp(40px,5.6vw,78px); margin-bottom:clamp(22px,3vh,34px); }
+  #paula .ghost{ bottom:1vh; font-size:clamp(150px,28vw,420px); }
+  #paula .photo .in{ aspect-ratio:808/439; }
+  #paula .who{ font-size:clamp(20px,2vw,27px); line-height:1.5; color:var(--paper); max-width:34ch; margin:0 0 26px; }
+  .light .photo .in, .light .photo .frame{ border-color:rgba(10,10,11,.14); }
+
+  /* Blog (lista): mesma composição da home — branco, 3 fotos proporcionais à altura da tela, texto centralizado */
+  #lista .ghost{ top:6vh; font-size:clamp(200px,38vw,560px); }
+  #lista .wrap{ align-items:stretch; }
+  .blog-inner{ width:100%; padding-block:clamp(96px,14vh,132px); }
+  .sec-head{ margin-bottom:clamp(36px,5vh,56px); }
+  .sec-head .display{ font-size:clamp(48px,7vw,92px); }
+  .grid3{ display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(20px,2.4vw,34px); align-items:start; }
+  @media (max-width:560px){ .grid3{ grid-template-columns:1fr; max-width:440px; margin-inline:auto; } }
+  .post{ display:flex; flex-direction:column; }
+  .post .media{ display:block; aspect-ratio:4/5; overflow:hidden; border:1px solid rgba(10,10,11,.14); }
+  .post .media img{ width:100%; height:100%; object-fit:cover; display:block; will-change:transform; transform:scale(1.3); filter:grayscale(1) contrast(1.06) brightness(.95); }
+  .post h3{ font-family:var(--f-display); font-weight:500; font-size:clamp(24px,2.3vw,31px); line-height:1.12; margin:20px 0 8px; letter-spacing:-.005em; }
+  .post p{ margin:0; color:#5b5953; font-size:15.5px; line-height:1.55; }
+  .post .more{ font-family:var(--f-label); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink);
+    margin-top:16px; border-bottom:1px solid rgba(10,10,11,.3); padding-bottom:4px; align-self:flex-start; transition:.25s; }
+  .post .more:hover{ letter-spacing:.24em; }
+  @media (pointer:coarse){ .post .more{ padding-block:10px 8px; } }
+  /* a lista trava e o texto continua subindo (fotos ficam paradas); a Paula sobe e cobre */
+  #lista > .wrap{ transform:none; }
+  #lista .sec-head, #lista .post h3, #lista .post p, #lista .post .more{ translate:0 calc(var(--cy,0) * -1px); }
+  @media (max-width:860px), (max-height:600px){ #lista .sec-head, #lista .post h3, #lista .post p, #lista .post .more{ translate:none; } }
+  @media (min-width:861px) and (min-height:601px){
+    #lista{ height:calc(100svh - 20px); min-height:0;
+      --phv:clamp(170px, calc(94svh - 440px), 400px);
+      --pw:min(calc(var(--phv) * .8), calc((min(1360px, 92vw) - 100px - 280px) / 3));
+      --ph:calc(var(--pw) / .8); }
+    .blog-inner{ height:100%; display:flex; flex-direction:column; justify-content:flex-start; padding-top:clamp(84px,11vh,112px); padding-bottom:clamp(20px,4vh,44px); }
+    .sec-head{ margin-bottom:clamp(18px,3.4vh,40px); }
+    #lista .wrap{ max-width:1440px; }
+    .grid3{ display:flex; justify-content:space-between; gap:0; padding-inline:50px; }
+    .post{ flex:0 0 var(--pw); }
+    .post .media{ aspect-ratio:auto; width:var(--pw); height:var(--ph); }
+    .post h3{ margin:16px -50px 6px; text-align:center; }
+    .post p{ margin:0 -50px; text-align:center; }
+    .post .more{ align-self:center; }
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <a href="/" class="brand" aria-label="Elo Vital — início"><img class="logo-mark" src="/imagens/logo_elo_vital.png" alt=""><b>Elo Vital</b></a>
+  <div class="social">
+    <a class="insta" href="#" aria-label="Instagram" title="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+    <a class="whats" href="https://wa.me/5516988209196" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="b" d="M12 2.6a9.4 9.4 0 0 0-8.1 14.1L2.7 21.3l4.7-1.2A9.4 9.4 0 1 0 12 2.6z"/><path class="p" transform="translate(7.2 7.2) scale(.4)" d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></a>
+  </div>
+  <nav class="nav" id="nav" aria-label="Principal"><a href="/">Início</a><a href="/psicologia-junguiana/">Psicologia Junguiana</a><a href="/o-jogo-do-heroi/">O Jogo do Herói</a><a href="/blog/" aria-current="page">Blog</a><a href="#contato">Contato</a></nav>
+  <button class="menu-btn" id="menubtn" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav"><span></span><span></span><span></span></button>
+</header>
+<div class="vmark">psicologia junguiana</div>
+
+<main>
+
+  <!-- LISTA (trava; a Paula sobe e cobre) -->
+  <section class="sec light" id="lista" data-pin>
+    <div class="ghost" data-speed="0.55" data-x="-14" aria-hidden="true">Blog</div>
+    <div class="rule" data-speed="-0.25" style="left:14%; top:-10%; height:60%"></div>
+    <div class="rule" data-speed="0.3" style="right:11%; top:30%; height:70%"></div>
+    <div class="wrap"><div class="blog-inner">
+      <div class="sec-head" data-speed="0.12"><h1 class="display" data-rev>Blog</h1></div>
+      <div class="grid3">
+        <article class="post" data-speed="-0.06">
+          <a class="media" data-rev href="/como-comeca-uma-jornada-heroica/"><img data-para data-scale="1.3" data-amp="40" alt="Tabuleiro do Jogo do Herói com esferas de vidro e dados" src="/imagens/post_jornada_card.jpg"></a>
+          <h3 data-rev><a href="/como-comeca-uma-jornada-heroica/">Como começa uma jornada heroica?</a></h3>
+          <p data-rev>Tudo pode começar por um sentimento de busca… Uma inquietação que persiste, uma forte insatisfação, o anseio ou a ambição que nos …</p>
+          <a class="more" data-rev href="/como-comeca-uma-jornada-heroica/">Leia mais →</a>
+        </article>
+        <article class="post" data-speed="0.10">
+          <a class="media" data-rev style="transition-delay:0.08s" href="/ah-esse-tal-de-inconsciente/"><img data-para data-scale="1.3" data-amp="40" alt="Rosto dividido entre claro e escuro" src="/imagens/post_inconsciente_card.jpg"></a>
+          <h3 data-rev style="transition-delay:0.08s"><a href="/ah-esse-tal-de-inconsciente/">Ah, esse tal de inconsciente…</a></h3>
+          <p data-rev style="transition-delay:0.08s">Umas das coisas que mais me impressiona e fascina é perceber o vasto campo de expressões e criações da nossa mente atuando …</p>
+          <a class="more" data-rev style="transition-delay:0.08s" href="/ah-esse-tal-de-inconsciente/">Leia mais →</a>
+        </article>
+        <article class="post" data-speed="-0.16">
+          <a class="media" data-rev style="transition-delay:0.16s" href="/herois-e-heroinas/"><img data-para data-scale="1.3" data-amp="40" alt="imagens de figuras humanas arquetípicas" src="/imagens/post_herois_card.jpg"></a>
+          <h3 data-rev style="transition-delay:0.16s"><a href="/herois-e-heroinas/">Heróis e heroínas</a></h3>
+          <p data-rev style="transition-delay:0.16s">A Jornada do Herói e sua temática são abordados com frequência nas mais diversas áreas. Nas artes, especialmente no cinema e na …</p>
+          <a class="more" data-rev style="transition-delay:0.16s" href="/herois-e-heroinas/">Leia mais →</a>
+        </article>
+      </div>
+    </div></div>
+  </section>
+
+  <!-- PAULA CORDERO -->
+  <section class="sec" id="paula">
+    <div class="ghost" data-speed="0.5" data-x="16" aria-hidden="true">Paula</div>
+    <div class="wrap"><div class="pad"><div class="cols b">
+      <div class="photo" data-speed="-0.06"><div class="in" data-rev><img data-para alt="Paula Cordero" src="/imagens/paula_cordero.jpg"></div><div class="frame" style="inset:-18px 18px 18px -18px"></div></div>
+      <div>
+        <h2 class="display" data-rev>Paula Cordero</h2>
+        <p class="who" data-rev>Psicóloga, especializada em Psicologia Junguiana e facilitadora certificada no ‘O Jogo do Herói’, em Breathwork.</p>
+        <a class="btn" data-rev href="https://wa.me/5516988209196" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="b" d="M12 2.6a9.4 9.4 0 0 0-8.1 14.1L2.7 21.3l4.7-1.2A9.4 9.4 0 1 0 12 2.6z"/><path class="p" transform="translate(7.2 7.2) scale(.4)" d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Agende Sua Consulta</a>
+      </div>
+    </div></div></div>
+  </section>
+
+<footer id="contato" role="contentinfo">
+  <div class="foot-in">
+    <span class="foot-brand"><img src="/imagens/logo_elo_vital.png" alt=""> Elo Vital</span>
+    <nav class="foot-nav" aria-label="Redes"><a href="#">Instagram</a><a href="https://wa.me/5516988209196" target="_blank" rel="noopener">WhatsApp</a></nav>
+    <p class="copy">© Elo Vital — Todos os direitos reservados — Desenvolvido por Pulsar Marketing e Comunicação</p>
+  </div>
+</footer>
+
+</main>
+
+<script src="/assets/site.js"></script>
+</body>
+</html>
