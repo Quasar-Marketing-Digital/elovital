@@ -3,7 +3,7 @@
 com imagens como marcadores {{IMG:arquivo}} a trocar pelos endereços da biblioteca de mídia.
 Saída: wp_pages/<slug>.html + wp_pages/manifesto.json (título, slug, modelo e lista de mídias a enviar).
 Não usa nenhuma credencial."""
-import os, re, json, base64, shutil
+import os, re, json, base64, shutil, hashlib
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/'
 OUT = ROOT + 'wp_pages/'
@@ -39,7 +39,7 @@ def build(src, title):
     def extract(m):
         mime, b64 = m.group(1), m.group(2)
         ext = {'video/mp4': 'mp4', 'image/jpeg': 'jpg', 'image/png': 'png'}[mime]
-        raw = base64.b64decode(b64); h = format(abs(hash(b64[:200])) % (16**8), '08x')
+        raw = base64.b64decode(b64); h = hashlib.md5(b64.encode()).hexdigest()[:8]
         name = f'{"video" if ext=="mp4" else "inline"}_{h}.{ext}'
         os.makedirs(OUT + '_media/', exist_ok=True); open(OUT + '_media/' + name, 'wb').write(raw)
         media[name] = OUT + '_media/' + name
@@ -76,6 +76,14 @@ def build(src, title):
     if src.endswith('home_v5.html'):
         # a home tem CSS/JS próprios completos: não misturar com o site.css
         html = '\n'.join([fonts, styles, GUARD.join(['<style>', '</style>']), body.strip()])
+    # 6) o WordPress troca "&" por "&#038;" no conteúdo (quebra "&&" do JavaScript): reescrever sem "&"
+    for a, b in [('menuBtn && navEl', 'menuBtn ? navEl : null'),
+                 ('r.top < y && r.bottom > y', '(r.top < y ? r.bottom > y : false)'),
+                 ('b.top < y && b.bottom > y && s.top > y', '(b.top < y ? (b.bottom > y ? s.top > y : false) : false)'),
+                 ('vw <= 860 && !l.deco ?', '(vw <= 860 ? !l.deco : false) ?')]:
+        html = html.replace(a, b)
+    html = html.replace('&family', '&amp;family').replace('&display', '&amp;display')
+    assert '&&' not in html and not re.search(r'&(?![a-z#0-9]+;)', html), 'sobrou & solto'
     return html, media
 
 if __name__ == '__main__':
