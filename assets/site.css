@@ -107,3 +107,12 @@ footer{ position:relative; z-index:2; background:var(--ink); border-top:1px soli
 .foot-nav a{ font-family:var(--f-label); font-size:11.5px; letter-spacing:.18em; text-transform:uppercase; color:var(--paper-dim); transition:.25s; padding-block:6px; }
 .foot-nav a:hover{ color:var(--paper); }
 .copy{ width:100%; font-family:var(--f-label); font-size:10.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--mute); margin:8px 0 0; line-height:1.8; }
+
+/* ===== pares de seções: (1-2)(3-4)(5-6) =====
+   A 1ª de cada par (data-pin) trava e a 2ª sobe cobrindo. Entre a 2ª e a 3ª não há efeito, e assim por diante.
+   'top' é ajustado por JS: min(0, altura da tela - altura da seção), para seções altas rolarem inteiras antes de travar. */
+.sec[data-pin]{ position:sticky; top:0; }
+.sec[data-pin]::after{ content:""; position:absolute; inset:0; z-index:5; background:#000; opacity:var(--cover,0); pointer-events:none; }
+.sec[data-pin] > .wrap{ transform:translateY(calc(var(--cp,0) * -6vh)); }
+.sec[data-covers]{ box-shadow:0 -28px 70px rgba(0,0,0,.5); }
+@media (prefers-reduced-motion:reduce){ .sec[data-pin]{ position:relative; } .sec[data-pin]::after{ display:none; } .sec[data-pin] > .wrap{ transform:none; } }

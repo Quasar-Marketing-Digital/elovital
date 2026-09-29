@@ -28,7 +28,24 @@
   }
   if(lights.length){ addEventListener('scroll', updChrome, {passive:true}); addEventListener('resize', updChrome, {passive:true}); updChrome(); }
 
+  // ---- pares de seções (1-2)(3-4)(5-6): a 1ª (data-pin) trava; a 2ª (a seguinte no DOM) sobe cobrindo
+  const pins = [...document.querySelectorAll('.sec[data-pin]')];
+  pins.forEach(s=>{ if(s.nextElementSibling) s.nextElementSibling.setAttribute('data-covers',''); });
+  function setPins(){ const vh = innerHeight; pins.forEach(s=>{ s.style.top = Math.min(0, vh - s.offsetHeight) + 'px'; }); }
+  setPins(); addEventListener('resize', setPins, {passive:true}); addEventListener('load', setPins);
+
   if(rm) return;
+
+  // quanto a 2ª já cobriu a 1ª (0→1): escurece um pouco e faz o conteúdo da 1ª subir devagar
+  function updCover(){
+    const vh = innerHeight;
+    for(const s of pins){
+      const c = s.nextElementSibling; if(!c) continue;
+      const p = clamp((vh - c.getBoundingClientRect().top)/vh, 0, 1);
+      s.style.setProperty('--cover', (p*0.6).toFixed(3)); s.style.setProperty('--cp', p.toFixed(3));
+    }
+  }
+  addEventListener('scroll', ()=>requestAnimationFrame(updCover), {passive:true}); addEventListener('resize', updCover, {passive:true}); updCover();
 
   // ---- parallax
   const K = 0.7;   // fundo anda ~0,3× do scroll (igual ao Jogo do Herói da home)
