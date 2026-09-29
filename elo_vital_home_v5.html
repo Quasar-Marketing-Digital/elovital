@@ -122,13 +122,20 @@
   /* Blog cabe inteiro numa tela (título + fotos + textos) para travar já com tudo à vista.
      Fotos proporcionais à ALTURA da janela (--ph), 4:5; mais espaço entre os 3 blocos. Telas pequenas mantêm o layout anterior. */
   @media (min-width:861px) and (min-height:601px){
-    #blog{ height:100svh; min-height:0; --ph:clamp(170px, calc(94svh - 440px), 460px); --cw:max(calc(var(--ph) * .8), 270px); }
+    /* seção 20px mais baixa que a tela; foto: altura limitada por --phv (janela) e largura por --pw (sobra >=140px entre fotos p/ o texto, que passa 50px de cada lado) */
+    #blog{ height:calc(100svh - 20px); min-height:0;
+      --phv:clamp(170px, calc(94svh - 440px), 400px);
+      --pw:min(calc(var(--phv) * .8), calc((min(1360px, 92vw) - 100px - 280px) / 3));
+      --ph:calc(var(--pw) / .8); }
     .blog-inner{ height:100%; display:flex; flex-direction:column; justify-content:flex-start; padding-top:clamp(84px,11vh,112px); padding-bottom:clamp(20px,4vh,44px); }
     .sec-head{ margin-bottom:clamp(18px,3.4vh,40px); }
-    .grid3{ display:flex; justify-content:space-between; gap:clamp(32px,6vw,110px); }
-    .post{ flex:0 1 var(--cw); }
-    .post .media{ aspect-ratio:auto; width:calc(var(--ph) * .8); height:var(--ph); }
-    .post h3{ margin:16px 0 6px; }
+    #blog .wrap{ max-width:1440px; }
+    .grid3{ display:flex; justify-content:space-between; gap:0; padding-inline:50px; }
+    .post{ flex:0 0 var(--pw); }
+    .post .media{ aspect-ratio:auto; width:var(--pw); height:var(--ph); }
+    .post h3{ margin:16px -50px 6px; text-align:center; }
+    .post p{ margin:0 -50px; text-align:center; }
+    .post .more{ align-self:center; }
   }
   #sobre{ background:var(--ink-2); z-index:3; }
   #sobre .ghost{ bottom:4vh; font-size:clamp(180px,34vw,500px); }
@@ -301,7 +308,7 @@
   addEventListener('resize', updChrome, {passive:true});
   updChrome();
   // texto do Blog rola enquanto o resto fica pinado
-  function updPin(){ blogEl.style.setProperty('--pin', clamp(innerHeight - sobreEl.getBoundingClientRect().top, 0, innerHeight).toFixed(1)); }
+  function updPin(){ const start = Math.min(blogEl.offsetHeight, innerHeight); blogEl.style.setProperty('--pin', clamp(start - sobreEl.getBoundingClientRect().top, 0, start).toFixed(1)); }
   addEventListener('scroll', updPin, {passive:true});
   addEventListener('resize', updPin, {passive:true});
   updPin();
