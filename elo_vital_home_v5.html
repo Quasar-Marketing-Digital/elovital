@@ -153,10 +153,15 @@
     .post p{ margin:0 -50px; text-align:center; }
     .post .more{ align-self:center; }
   }
-  /* celular/tablet em pé e telas baixas: Blog em fluxo normal (sem travar), texto rola junto com tudo */
+  /* celular/tablet em pé e telas baixas: o Blog rola normalmente e só TRAVA NO FINAL (sticky com top = altura da tela - altura do Blog, ajustado por JS);
+     a seção da Paula sobe e cobre. O texto não sobe junto (mais leve para aparelhos fracos). */
   @media (max-width:860px), (max-height:600px){
-    #blog{ position:relative; top:auto !important; }
     #blog .sec-head, #blog .post h3, #blog .post p, #blog .post .more{ translate:none; }
+  }
+  /* celular: fotos um pouco menos saturadas (telas de celular deixam as cores mais vivas) */
+  @media (max-width:860px){
+    #jogo .img{ filter:saturate(.85) contrast(1.05) brightness(.85); }
+    #sobre .portrait img{ filter:saturate(.85) contrast(1.05) brightness(.97); }
   }
   @media (pointer:coarse){ .post .more{ padding-block:10px 8px; } .social a{ padding:11px; } }
   #sobre{ background:var(--ink-2); z-index:3; }
