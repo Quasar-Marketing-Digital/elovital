@@ -36,13 +36,15 @@
 
   if(rm) return;
 
-  // quanto a 2ª já cobriu a 1ª (0→1): escurece um pouco e faz o conteúdo da 1ª subir devagar
+  // quanto a 2ª já cobriu a 1ª JÁ TRAVADA. d = distância rolada desde que a 1ª travou (px), p = d/span (0→1).
+  // Escurece a 1ª; nas seções com data-textscroll o TEXTO sobe 1:1 com o scroll (--cy) enquanto imagem/fundo ficam parados.
   function updCover(){
     const vh = innerHeight;
     for(const s of pins){
       const c = s.nextElementSibling; if(!c) continue;
-      const p = clamp((vh - c.getBoundingClientRect().top)/vh, 0, 1);
-      s.style.setProperty('--cover', (p*0.6).toFixed(3)); s.style.setProperty('--cp', p.toFixed(3));
+      const span = Math.min(s.offsetHeight, vh);
+      const d = clamp(span - c.getBoundingClientRect().top, 0, span), p = d/span;
+      s.style.setProperty('--cover', (p*0.6).toFixed(3)); s.style.setProperty('--cp', p.toFixed(3)); s.style.setProperty('--cy', d.toFixed(1));
     }
   }
   addEventListener('scroll', ()=>requestAnimationFrame(updCover), {passive:true}); addEventListener('resize', updCover, {passive:true}); updCover();

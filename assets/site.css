@@ -116,3 +116,7 @@ footer{ position:relative; z-index:2; background:var(--ink); border-top:1px soli
 .sec[data-pin] > .wrap{ transform:translateY(calc(var(--cp,0) * -6vh)); }
 .sec[data-covers]{ box-shadow:0 -28px 70px rgba(0,0,0,.5); }
 @media (prefers-reduced-motion:reduce){ .sec[data-pin]{ position:relative; } .sec[data-pin]::after{ display:none; } .sec[data-pin] > .wrap{ transform:none; } }
+
+/* seções em que a imagem/fundo é uma camada separada do texto (abertura, 'Como funciona'): o TEXTO continua subindo 1:1 com o scroll
+   enquanto a imagem fica parada e a 2ª seção sobe — como o vídeo e o texto do herói da home */
+.sec[data-pin][data-textscroll] > .wrap{ transform:translateY(calc(var(--cy,0) * -1px)); }
