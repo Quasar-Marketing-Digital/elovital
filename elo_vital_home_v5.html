@@ -79,7 +79,7 @@
   /* Jogo do Herói: opaque → cobre o vídeo ao subir; imagem com parallax 0.3× */
   #jogo{ position:relative; min-height:100vh; min-height:100svh; background:var(--ink); overflow:hidden; z-index:2; display:flex; align-items:flex-end; }
   #jogo .img{ position:absolute; inset:0; z-index:0; background-position:center; background-size:cover;
-    filter:contrast(1.05) brightness(.85); will-change:transform; transform:scale(2.5); }
+    filter:contrast(1.05) brightness(.85); will-change:transform; transform:scale(1.15); }
   #jogo .scrim{ position:absolute; inset:0; z-index:1; background:linear-gradient(to top, rgba(6,6,7,.85), rgba(6,6,7,.15) 55%, rgba(6,6,7,.4)); }
   #jogo .wrap{ position:relative; z-index:2; padding-block:clamp(84px,16vh,150px); }
   #jogo h2{ font-family:var(--f-display); font-weight:300; margin:0; font-size:clamp(46px,9vw,120px); line-height:.98; }
@@ -158,7 +158,6 @@
     #blog{ position:relative; top:auto !important; }
     #blog .sec-head, #blog .post h3, #blog .post p, #blog .post .more{ translate:none; }
   }
-  @media (max-width:860px){ #jogo .img{ transform:scale(1.15); } }
   @media (pointer:coarse){ .post .more{ padding-block:10px 8px; } .social a{ padding:11px; } }
   #sobre{ background:var(--ink-2); z-index:3; }
   #sobre .ghost{ bottom:4vh; font-size:clamp(180px,34vw,500px); }
@@ -293,7 +292,7 @@
   const img = document.getElementById('jogoimg');
   const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
   // K=0.7 => imagem anda a ~0.3× do bloco (velocidade líquida). TUNÁVEL, confirmado por medição.
-  const K = 0.7, SCALE = matchMedia('(max-width:860px)').matches ? 1.15 : 2.5;  // celular: zoom menor (a imagem é pequena)
+  const K = 0.7, SCALE = 1.15;  // zoom mínimo p/ o parallax (antes 2.5: ampliava demais a foto, que é pequena)
   let tick=false;
   function upd(){
     const vh = innerHeight;
