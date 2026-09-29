@@ -49,13 +49,27 @@ POSTS = [
 LIST_ORDER = ['como-comeca-uma-jornada-heroica', 'ah-esse-tal-de-inconsciente', 'herois-e-heroinas']   # ordem da listagem do site
 BY = {p['slug']: p for p in POSTS}
 
-def head(title, css):
+BASE = 'https://elovital.com.br'
+DESC = {
+ '/blog/': 'Artigos sobre a jornada heroica, o inconsciente e a Psicologia Junguiana.',
+ '/como-comeca-uma-jornada-heroica/': 'Tudo pode começar por um sentimento de busca, uma inquietação que persiste. Entenda como começa uma jornada heroica e o processo de individuação.',
+ '/ah-esse-tal-de-inconsciente/': 'O vasto campo de expressões e criações da nossa mente atuando de modo inconsciente, na visão da Psicologia Junguiana.',
+ '/herois-e-heroinas/': 'A Jornada do Herói na mitologia, na literatura e na psicologia de Jung: heróis e heroínas como uma jornada essencialmente interna.',
+}
+def meta(title, path):
+    d = html.escape(DESC[path], quote=True); t = html.escape(title + ' — Elo Vital', quote=True)
+    return (f'\n<meta name="description" content="{d}">\n<meta name="theme-color" content="#0a0a0b">\n'
+      '<link rel="icon" type="image/png" sizes="32x32" href="imagens/favicon-32.png">\n<link rel="apple-touch-icon" href="imagens/apple-touch-icon.png">\n'
+      f'<meta property="og:type" content="website"><meta property="og:locale" content="pt_BR"><meta property="og:site_name" content="Elo Vital">\n'
+      f'<meta property="og:description" content="{d}"><meta property="og:url" content="{BASE}{path}"><meta property="og:image" content="{BASE}/imagens/favicon-192.png">\n<meta property="og:title" content="{t}">')
+
+def head(title, css, path):
     return f'''<!doctype html>
 <html lang="pt-BR" data-theme="dark">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>{html.escape(title)} — Elo Vital</title>
+<title>{html.escape(title)} — Elo Vital</title>{meta(title, path)}
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Newsreader:ital,wght@0,400;1,400&family=Archivo:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="assets/site.css">
 <style>
@@ -189,7 +203,7 @@ def listing():
 
 {PAULA}
 '''
-    return head('Blog', css) + HEADER + body + FOOTER
+    return head('Blog', css, '/blog/') + HEADER + body + FOOTER
 
 # ---------------------------------------------------------------- POST
 def post_page(p):
@@ -275,7 +289,7 @@ def post_page(p):
   </section>
 
 '''
-    return head(p['title'], css) + HEADER + body + FOOTER
+    return head(p['title'], css, '/' + p['slug'] + '/') + HEADER + body + FOOTER
 
 if __name__ == '__main__':
     open(ROOT + 'elo_vital_blog.html', 'w', encoding='utf-8').write(listing())

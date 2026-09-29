@@ -12,6 +12,7 @@ MAP = {  # arquivo do projeto -> caminho publicado
   'elo_vital_post_herois_e_heroinas.html': 'herois-e-heroinas/index.html',
   'elo_vital_post_como_comeca_uma_jornada_heroica.html': 'como-comeca-uma-jornada-heroica/index.html',
   'elo_vital_post_ah_esse_tal_de_inconsciente.html': 'ah-esse-tal-de-inconsciente/index.html',
+  'elo_vital_404.html': '404.html',
 }
 USADAS = set()
 if os.path.isdir(DIST): shutil.rmtree(DIST)
